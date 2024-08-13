@@ -1,16 +1,23 @@
 .cocktail-card {
+    align-items: center;
     background-color: darkred;
-    display: flex;
     color: white;
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    max-width: 10rem;
+    padding: 2rem;
 }
 
 .cocktail-figure {
-
+    margin: 0;
 }
 .cocktail-image {
-    
+    max-width: 100%;
 }
 
 .cocktail-name {
-
+    margin: 0;
+    margin-top: 1rem;
+    text-align: center;
 }
