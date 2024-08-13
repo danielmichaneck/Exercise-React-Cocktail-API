@@ -6,7 +6,8 @@ export interface ICocktail {
     id: string,
     image: string;
     ingredients: string[],
-    instructions: string[],
+    instructions: string,
+    measures: string[],
     name: string,
     thumbnail: string,
 }
