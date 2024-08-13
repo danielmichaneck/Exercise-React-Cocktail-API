@@ -34,7 +34,7 @@ export function SearchPage(): ReactElement {
         <Link to="/">Home</Link>
         <SearchForm submit={submit}/>
         {cocktails?.map((cocktail) => {
-            return <Cocktail key={cocktail.id} text={cocktail.name}/>
+            return <Cocktail key={cocktail.id} text={cocktail.name} thumbnail={cocktail.thumbnail}/>
         })}
     </div>
 }

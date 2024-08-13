@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import './App.css'
+import "./css/App.css"
 import { Header } from './components';
 import { ICocktail } from './interfaces';
 import { useState } from 'react';

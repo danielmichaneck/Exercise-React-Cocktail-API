@@ -8,23 +8,30 @@ import { defaultCocktail } from "../defaultCocktail";
 export function HomePage(): ReactElement {
     const [randomCocktail, setRandomCocktail] = useState<ICocktail>(defaultCocktail());
 
+    useEffect(() => {
+        updateRandomCocktail();
+    }, []);
+
     const setRC = (c: ICocktail) => {
         setRandomCocktail(c);
-    } 
+    }
 
-    useEffect(() => {
+    const updateRandomCocktail = () => {
         getCocktail("", true).then((cs: ICocktail[]) => {
             cs.map((c: ICocktail) => {
                 console.log("Random cocktail: " + c)
                 setRC(c);
             })
         })
-    }, []);
-    
+    }
 
+    const handleOnClick: React.MouseEventHandler<HTMLButtonElement> = () => {
+        updateRandomCocktail();
+    }
 
     return <div>
         <Link to="/search-cocktail">Search</Link>
-        <Cocktail key={randomCocktail.id} text={randomCocktail.name}/>
+        <Cocktail key={randomCocktail.id} text={randomCocktail.name} thumbnail={randomCocktail.thumbnail}/>
+        <button onClick={handleOnClick}>Another cocktail?</button>
     </div>
 }
