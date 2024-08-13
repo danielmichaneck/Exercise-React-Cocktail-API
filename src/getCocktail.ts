@@ -1,6 +1,6 @@
 import { ICocktail } from "./interfaces";
 
-export async function getCocktail(): Promise<ICocktail[]> {
+export async function getCocktail(name?: string): Promise<ICocktail[]> {
     let cocktails: ICocktail[] = [];
 
     const pushCocktail = (cocktail: ICocktail) => {
@@ -9,8 +9,8 @@ export async function getCocktail(): Promise<ICocktail[]> {
         //console.log(cocktails);
     }
     
-    await fetchCocktail().then((drinks) => {
-        if (drinks !== undefined) {
+    await fetchCocktail(name).then((drinks) => {
+        if (drinks !== undefined && drinks !== null) {
             drinks.map((drink: ICocktail | undefined) => (
                 (drink !== undefined) &&
                 pushCocktail(formatCocktail(drink))
@@ -55,9 +55,13 @@ function formatCocktail(data: any): ICocktail {
     return cocktail;
 }
 
-async function fetchCocktail() {
+async function fetchCocktail(name?: string) {
     try {
-        const response = await fetch("https://thecocktaildb.com/api/json/v1/1/search.php?s=margarita");
+        let url = "https://thecocktaildb.com/api/json/v1/1/search.php?s=";
+        if (name !== undefined) {
+            url += name;
+        }
+        const response = await fetch(url);
         const result = await response.json();
         console.log("Result: " + JSON.stringify(result.drinks));
         return result.drinks;

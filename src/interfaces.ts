@@ -11,3 +11,7 @@ export interface ICocktail {
     name: string,
     thumbnail: string,
 }
+
+export interface ISearch {
+    name: string;
+}
