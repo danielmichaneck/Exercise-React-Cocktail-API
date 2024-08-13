@@ -1,14 +1,22 @@
-import { Outlet } from 'react-router-dom';
-import "./css/App.css"
+import { useNavigate, Outlet } from 'react-router-dom';
 import { Header } from './components';
-import { ICocktail } from './interfaces';
+import { ICocktail, IContext } from './interfaces';
 import { useState } from 'react';
+
+import "./css/App.css"
 
 export function App() {
   const [selectedCocktail, setSelectedCocktail] = useState<ICocktail>();
 
-  const context = {
+  const navigate = useNavigate();
 
+  const goToInfoPage = (cocktail: ICocktail) => {
+    setSelectedCocktail(cocktail);
+    navigate("/cocktail-info");
+  }
+
+  const context: IContext = {
+    goToInfoPage: goToInfoPage
   }
 
   return <div className="content">

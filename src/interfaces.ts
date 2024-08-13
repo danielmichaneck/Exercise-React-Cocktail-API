@@ -12,6 +12,10 @@ export interface ICocktail {
     thumbnail: string,
 }
 
+export interface IContext {
+    goToInfoPage: (cocktail: ICocktail) => void;
+}
+
 export interface ISearch {
     name: string;
 }

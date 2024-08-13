@@ -1,7 +1,4 @@
-import { ReactElement, useEffect, useState } from "react";
-import { ICocktail } from "../interfaces";
-import { getCocktail } from "../getCocktail";
-
+import { ReactElement } from "react";
 
 import '../css/Cocktail.css'
 
@@ -16,5 +13,6 @@ export function Cocktail(props: CocktailProps): ReactElement {
             <img src={props.thumbnail} className="cocktail-image"></img>
         </figure>
         <p className="cocktail-name">{props.text}</p>
+        <button>Read more</button>
     </div>;
 }
