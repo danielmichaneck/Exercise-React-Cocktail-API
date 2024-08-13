@@ -4,28 +4,43 @@ import { getCocktail } from "../getCocktail";
 import { ICocktail } from "../interfaces";
 
 export function HomePage(): ReactElement {
-    const [cocktailText, setCocktailText] = useState<string>("");
-    const [numberOfUpdates, setNumberOfUpdates] = useState<number>(0);
-
-    const setFunc = (value: string) => {
-        console.log("Cocktail text:")
-        console.log(cocktailText);
-        setCocktailText(value);
-    }
+    const [cocktails, setCocktails] = useState<ICocktail[]>([defaultCocktail()]);
 
     useEffect(() => {
         setTimeout(() => {
-            getCocktail().then((cocktail: ICocktail[]) => {
-                //setFunc(cocktail.name);
-                setNumberOfUpdates(numberOfUpdates + 1);
-                console.log("Cocktails in Homepage: ");
-                console.log(cocktail[1].name);
-                console.log("Number of updates: " + numberOfUpdates)
+            getCocktail().then((cs: ICocktail[]) => {
+                let co: ICocktail[] = [defaultCocktail()];
+                cs.map((c: ICocktail) => {
+                    co.push(c);
+                })
+                setCocktails(co);
             })
         }, 1000
     )}, [])
 
     return <div>
-        <Cocktail text={cocktailText}/>
+        <input type="text"></input>
+        {cocktails?.map((cocktail) => {
+            return <Cocktail key={cocktail.id} text={cocktail.name}/>
+        })}
     </div>
+}
+
+
+
+
+function defaultCocktail(): ICocktail {
+    return {
+        alcoholic: false,
+        category: "",
+        glass: "",
+        iba: "",
+        id: "",
+        image: "",
+        ingredients: [""],
+        instructions: "",
+        measures: [""],
+        name: "",
+        thumbnail: ""
+    }
 }
