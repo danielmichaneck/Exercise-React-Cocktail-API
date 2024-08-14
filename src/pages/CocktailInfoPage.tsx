@@ -23,7 +23,6 @@ export function CocktailInfoPage(): ReactElement {
     const params = useParams();
 
     useEffect(() => {
-
         if (params.id !== "cocktail-info") {
             console.log("params");
             console.log(params);
