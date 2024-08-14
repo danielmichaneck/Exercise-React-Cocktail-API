@@ -1,0 +1,16 @@
+.button-template {
+    background-color: rgb(100, 0, 0);
+    border: 2px solid white;
+    border-radius: 4px;
+    color: white;
+    font-weight: 500;
+    padding: 0.5rem;
+}
+
+.button-template:hover {
+    background-color: rgb(60, 0, 0);
+}
+
+.button-template:active {
+    color: gray;
+}

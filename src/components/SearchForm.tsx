@@ -18,5 +18,5 @@ export function SearchForm({submit}: SearchFormProps): ReactElement {
         submit({name: nameValue});
     }
 
-    return <form onSubmit={handleOnSubmit}><Input setValue={onNameValueChange}/></form>
+    return <form className="cocktail-search-form" onSubmit={handleOnSubmit}><Input setValue={onNameValueChange}/></form>
 }

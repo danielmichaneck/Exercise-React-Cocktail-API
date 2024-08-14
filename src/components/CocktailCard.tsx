@@ -1,6 +1,7 @@
 import { ReactElement, ReactNode } from "react";
 import { useCocktailContext } from "../hooks/useCocktailContext";
 import { ICocktail } from "../interfaces";
+import { ReadMoreButton } from "./ReadMoreButton";
 
 interface CocktailProps {
     cocktail: ICocktail;
@@ -16,7 +17,7 @@ export function Cocktail({cocktail, readMore}: CocktailProps): ReactElement {
 
     const buttonNode = (rm: boolean):ReactNode => {
         return (rm?
-            <button onClick={handleOnClick}>Read more</button> :
+            <div><ReadMoreButton cocktail={cocktail} clickReadMore={handleOnClick}/></div> :
             <div></div>);
     }
 

@@ -1,3 +1,5 @@
 .homepage-landing {
     background-color: darkred;
+    color: white;
+    display: flex;
 }
