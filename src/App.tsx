@@ -1,6 +1,6 @@
 import { useNavigate, Outlet } from 'react-router-dom';
 import { Header } from './components';
-import { ICocktail, IContext } from './interfaces';
+import { ICocktail, ICocktailContext } from './interfaces';
 import { useState } from 'react';
 
 import "./css/App.css"
@@ -11,11 +11,14 @@ export function App() {
   const navigate = useNavigate();
 
   const goToInfoPage = (cocktail: ICocktail) => {
-    setSelectedCocktail(cocktail);
-    navigate("/cocktail-info");
+    if (cocktail !== undefined) {
+      setSelectedCocktail(cocktail);
+      navigate("/cocktail-info/" + cocktail.id);
+    }
   }
 
-  const context: IContext = {
+  const context: ICocktailContext = {
+    selectedCocktail: selectedCocktail!, 
     goToInfoPage: goToInfoPage
   }
 

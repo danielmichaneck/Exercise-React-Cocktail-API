@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { defaultCocktail } from "../defaultCocktail";
 
 export function SearchPage(): ReactElement {
-    const [cocktails, setCocktails] = useState<ICocktail[]>([defaultCocktail()]);
+    const [cocktails, setCocktails] = useState<ICocktail[]>([]);
 
     // useEffect(() => {
     //     setTimeout(() => {
@@ -21,8 +21,8 @@ export function SearchPage(): ReactElement {
     // )}, [])
 
     const submit = (search: ISearch) => {
-        getCocktail(search.name).then((cs: ICocktail[]) => {
-            let co: ICocktail[] = [defaultCocktail()];
+        getCocktail("", search.name, false).then((cs: ICocktail[]) => {
+            let co: ICocktail[] = [];
             cs.map((c: ICocktail) => {
                 co.push(c);
             })
@@ -31,10 +31,9 @@ export function SearchPage(): ReactElement {
     }
 
     return <div>
-        <Link to="/">Home</Link>
         <SearchForm submit={submit}/>
         {cocktails?.map((cocktail) => {
-            return <Cocktail key={cocktail.id} text={cocktail.name} thumbnail={cocktail.thumbnail}/>
+            return <Cocktail key={cocktail.id} cocktail={cocktail} readMore={true}/>
         })}
     </div>
 }

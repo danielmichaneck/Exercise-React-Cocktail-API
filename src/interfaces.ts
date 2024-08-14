@@ -9,10 +9,12 @@ export interface ICocktail {
     instructions: string,
     measures: string[],
     name: string,
+    tags: string,
     thumbnail: string,
 }
 
-export interface IContext {
+export interface ICocktailContext {
+    selectedCocktail: ICocktail;
     goToInfoPage: (cocktail: ICocktail) => void;
 }
 

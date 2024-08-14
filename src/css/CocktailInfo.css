@@ -1,0 +1,14 @@
+.cocktail-info {
+    background-color: darkred;
+    color: white;
+    display: flex;
+}
+
+.cocktail-info-side {
+
+}
+
+.cocktail-ingredients-list {
+    display: flex;
+    justify-content: space-around;
+}

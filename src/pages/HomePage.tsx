@@ -17,9 +17,8 @@ export function HomePage(): ReactElement {
     }
 
     const updateRandomCocktail = () => {
-        getCocktail("", true).then((cs: ICocktail[]) => {
+        getCocktail("", "", true).then((cs: ICocktail[]) => {
             cs.map((c: ICocktail) => {
-                console.log("Random cocktail: " + c)
                 setRC(c);
             })
         })
@@ -30,8 +29,7 @@ export function HomePage(): ReactElement {
     }
 
     return <div>
-        <Link to="/search-cocktail">Search</Link>
-        <Cocktail key={randomCocktail.id} text={randomCocktail.name} thumbnail={randomCocktail.thumbnail}/>
+        <Cocktail key={randomCocktail.id} cocktail={randomCocktail} readMore={true}/>
         <button onClick={handleOnClick}>Another cocktail?</button>
     </div>
 }
