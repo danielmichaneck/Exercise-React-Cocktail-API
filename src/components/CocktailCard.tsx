@@ -17,7 +17,7 @@ export function Cocktail({cocktail, readMore}: CocktailProps): ReactElement {
 
     const buttonNode = (rm: boolean):ReactNode => {
         return (rm?
-            <div><ReadMoreButton cocktail={cocktail} clickReadMore={handleOnClick}/></div> :
+            <div><ReadMoreButton cocktail={cocktail} text="Read more" clickReadMore={handleOnClick}/></div> :
             <div></div>);
     }
 

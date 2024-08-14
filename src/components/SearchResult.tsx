@@ -12,8 +12,7 @@ export function SearchResult({cocktails}: SearchResultProps): ReactElement {
 
     return <li>
         {cocktails.map((cocktail) => (<div className="cocktail-search-row">
-            <p>{cocktail.name}</p>
-            <ReadMoreButton cocktail={cocktail} clickReadMore={context.goToInfoPage}/>
+            <ReadMoreButton cocktail={cocktail} text={cocktail.name} clickReadMore={context.goToInfoPage}/>
             </div>
         ))}
     </li>
