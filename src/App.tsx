@@ -3,7 +3,7 @@ import { Header } from './components';
 import { ICocktail, ICocktailContext } from './interfaces';
 import { useState } from 'react';
 
-import "./css/App.css"
+import "./css/"
 
 export function App() {
   const [selectedCocktail, setSelectedCocktail] = useState<ICocktail>();
@@ -22,9 +22,9 @@ export function App() {
     goToInfoPage: goToInfoPage
   }
 
-  return <div className="content">
+  return <div className="app">
     <Header/>
-    <div className="body">
+    <div className="content">
       <Outlet context={context}/>
     </div>
   </div>

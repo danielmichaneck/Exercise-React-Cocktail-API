@@ -1,6 +1,4 @@
 import { ReactElement, ReactNode } from "react";
-
-import '../css/Cocktail.css'
 import { useCocktailContext } from "../hooks/useCocktailContext";
 import { ICocktail } from "../interfaces";
 

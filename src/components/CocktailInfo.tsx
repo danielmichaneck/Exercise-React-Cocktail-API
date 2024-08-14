@@ -2,8 +2,6 @@ import { ReactElement, ReactNode } from "react";
 import { ICocktail } from "../interfaces";
 import { Cocktail } from ".";
 
-import "../css/CocktailInfo.css"
-
 interface CocktailInfoProps {
     cocktail: ICocktail;
 }

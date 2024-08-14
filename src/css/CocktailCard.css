@@ -4,7 +4,6 @@
     color: white;
     display: flex;
     flex-direction: column;
-    margin: 1rem;
     max-width: 10rem;
     padding: 2rem;
 }

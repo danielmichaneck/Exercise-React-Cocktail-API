@@ -1,0 +1,33 @@
+.header {
+    background-color: rgb(60, 0, 0);
+    color: white;
+    display: flex;
+    height: 6rem;
+    width: 100%;
+    position: absolute;
+}
+
+.header-link-active {
+    background-color: darkred;
+}
+
+.header-content {
+    align-items: end;
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    padding-left: 1rem;
+}
+
+.header-link {
+    border-radius: 1rem 1rem 0 0;
+    color: white;
+    text-decoration: none;
+    padding: 1rem;
+    padding-top: 2rem;
+}
+
+.header-title {
+    margin: 0;
+    padding-bottom: 1rem;
+}

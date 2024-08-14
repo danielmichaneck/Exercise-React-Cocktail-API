@@ -2,7 +2,6 @@ import { ReactElement, useEffect, useState } from "react";
 import { getCocktail } from "../getCocktail";
 import { ICocktail } from "../interfaces";
 import { Cocktail } from "../components";
-import { Link } from "react-router-dom";
 import { defaultCocktail } from "../defaultCocktail";
 
 export function HomePage(): ReactElement {
@@ -28,7 +27,7 @@ export function HomePage(): ReactElement {
         updateRandomCocktail();
     }
 
-    return <div>
+    return <div className="homepage-landing">
         <Cocktail key={randomCocktail.id} cocktail={randomCocktail} readMore={true}/>
         <button onClick={handleOnClick}>Another cocktail?</button>
     </div>
