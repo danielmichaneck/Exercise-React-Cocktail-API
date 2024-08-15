@@ -1,44 +1,39 @@
 import { ReactElement, useEffect, useState } from "react";
 import { ICocktail } from "../interfaces";
-import { ReadMoreButton } from "./ReadMoreButton";
-import { useCocktailContext } from "../hooks/useCocktailContext";
+import { SearchResultList } from "./SearchResultList";
 
 interface SearchResultProps {
     cocktails: ICocktail[];
 }
 
 export function SearchResult({cocktails}: SearchResultProps): ReactElement {
-    const {goToInfoPage} = useCocktailContext();
     const [index, setIndex] = useState<number>(0);
+    const [resultNumber, setResultNumber] = useState<number>(0);
     const [resultPages, setResultPages] = useState<ICocktail[][]>([cocktails]);
 
-    const pages = [cocktails];
-    for (let i = 0; i * 10 < cocktails.length + 10; i += 1) {
+    const pages: ICocktail[][] = [
+        cocktails.sort((itemA, itemB) => itemA.name.localeCompare(itemB.name))
+    ];
+
+    const length = cocktails.length;
+    let numberOfElements = 0;
+    for (let i = 0; i * 10 < length; i += 1) {
         if (cocktails.length > 10) {
             pages[i] = cocktails.splice(i, 10);
-            console.log("array at index " + i)
-            console.log(pages[i])
         }
         else {
             pages[i] = cocktails;
         }
+        numberOfElements += pages[i].length;
     }
-    console.log("pages");
-    console.log(pages);
 
     useEffect(() => {
-        console.log("useEffect in search results!")
-        
         setResultPages(pages);
-    }, []);
-
-    
-
-    console.log("final result")
-    console.log(resultPages)
+        setResultNumber(numberOfElements);
+    }, [cocktails]);
 
     const updateIndex = (newValue: number) => {
-        if (newValue > 0 && newValue < resultPages.length) {
+        if (newValue >= 0 && newValue < resultPages.length) {
             setIndex(newValue);
         }
     }
@@ -54,12 +49,7 @@ export function SearchResult({cocktails}: SearchResultProps): ReactElement {
     return <div>
         <button onClick={handleOnClickDecrement}>Previous page</button>
         <button onClick={handleOnClickIncrement}>Next page</button>
-        <p>index: {index}</p>
-        <li>
-            {resultPages[index].map((cocktail) => (<div className="cocktail-search-row">
-                <ReadMoreButton cocktail={cocktail} text={cocktail.name} clickReadMore={goToInfoPage}/>
-                </div>
-            ))}
-        </li>
+        <p>Result: {resultNumber} Page: {index + 1}</p>
+        <SearchResultList results={resultPages[index]}/>
     </div>
 }
