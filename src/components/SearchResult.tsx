@@ -27,10 +27,14 @@ export function SearchResult({cocktails}: SearchResultProps): ReactElement {
         numberOfElements += pages[i].length;
     }
 
+    console.log("Rendering search results")
+
     useEffect(() => {
         setResultPages(pages);
         setResultNumber(numberOfElements);
+        console.log("result number: " + resultNumber)
     }, [cocktails]);
+    
 
     const updateIndex = (newValue: number) => {
         if (newValue >= 0 && newValue < resultPages.length) {

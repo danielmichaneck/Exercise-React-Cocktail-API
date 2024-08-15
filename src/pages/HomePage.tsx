@@ -30,7 +30,7 @@ export function HomePage(): ReactElement {
     return <div className="homepage-landing">
         <div className="homepage-landing-left-column">
         <Cocktail key={randomCocktail.id} addFavorite={false} cocktail={randomCocktail} readMore={true}/>
-        <button onClick={handleOnClick}>Another cocktail?</button>
+        <button className="button-template" onClick={handleOnClick}>Another cocktail?</button>
         </div>
         <div className="homepage-landing-right-column">
         <p>Welcome to the cocktails page! Click "Search" to search for a cocktail.</p>

@@ -3,12 +3,8 @@ import { ICocktail } from "./interfaces";
 export async function getCocktail(id: string = "", name: string = "", random: boolean = false): Promise<ICocktail[]> {
     let cocktails: ICocktail[] = [];
 
-    console.log("Cocktail id: " + id);
-
     const pushCocktail = (cocktail: ICocktail) => {
-        //console.log(cocktail);
         cocktails.push(cocktail);
-        //console.log(cocktails);
     }
     
     await fetchCocktail(id, name, random).then((drinks) => {
@@ -17,8 +13,6 @@ export async function getCocktail(id: string = "", name: string = "", random: bo
                 (drink !== undefined) &&
                 pushCocktail(formatCocktail(drink))
             ))
-            console.log("getCocktail: ");
-            console.log(cocktails);
             return cocktails;
         }
     })
@@ -62,21 +56,16 @@ async function fetchCocktail(id: string = "", name: string = "", random: boolean
     try {
         let url = "https://thecocktaildb.com/api/json/v1/1/";
         if (name !== "") {
-            console.log("Getting cocktails by name.")
             url += "search.php?s=" + name;
         }
         if (random === true) {
-            console.log("Getting random cocktail.")
             url = "https://thecocktaildb.com/api/json/v1/1/random.php";
         }
         if (id !== "") {
-            console.log("Getting cocktail by id.")
             url += "lookup.php?i=" + id;
         }
-        console.log("URL: " + url);
         const response = await fetch(url);
         const result = await response.json();
-        console.log("Result: " + JSON.stringify(result.drinks));
         return result.drinks;
     }
     catch(error) {

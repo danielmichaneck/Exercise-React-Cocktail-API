@@ -10,11 +10,18 @@ interface SearchResultListProps {
 export function SearchResultList({results}: SearchResultListProps): ReactElement {
     const {goToInfoPage} = useCocktailContext();
     console.log("Rendering list")
-    console.log(results)
+    console.log(results[0])
+
+    const tempFunc = () => {
+        console.log("Rendering list items")
+        results.map((cocktail) => console.log(cocktail));
+        return results.map((cocktail) => (<div key={cocktail.id + "button"} className="cocktail-search-row">
+            <ReadMoreButton cocktail={cocktail} text={cocktail.name} clickReadMore={goToInfoPage}/>
+            </div>
+        ))
+    }
+
     return <li>
-    {results.map((cocktail) => (<div className="cocktail-search-row">
-        <ReadMoreButton cocktail={cocktail} text={cocktail.name} clickReadMore={goToInfoPage}/>
-        </div>
-    ))}
+    {tempFunc()}
 </li>
 }
