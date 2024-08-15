@@ -35,7 +35,6 @@ export function SearchResult({cocktails}: SearchResultProps): ReactElement {
         console.log("result number: " + resultNumber)
     }, [cocktails]);
     
-
     const updateIndex = (newValue: number) => {
         if (newValue >= 0 && newValue < resultPages.length) {
             setIndex(newValue);

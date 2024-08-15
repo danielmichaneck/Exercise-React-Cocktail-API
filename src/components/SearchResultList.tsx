@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { ICocktail } from "../interfaces";
 import { useCocktailContext } from "../hooks/useCocktailContext";
 import { ReadMoreButton } from "./ReadMoreButton";
@@ -8,14 +8,20 @@ interface SearchResultListProps {
 }
 
 export function SearchResultList({results}: SearchResultListProps): ReactElement {
+    const [cocktails, setCocktails] = useState<ICocktail[]>(results);
+
+    useEffect(() => {
+        setCocktails(results);
+        console.log("Setting cocktails in SearchResultList")
+        console.log(results)
+    }, [results])
+
     const {goToInfoPage} = useCocktailContext();
-    console.log("Rendering list")
-    console.log(results[0])
 
     const tempFunc = () => {
         console.log("Rendering list items")
-        results.map((cocktail) => console.log(cocktail));
-        return results.map((cocktail) => (<div key={cocktail.id + "button"} className="cocktail-search-row">
+        console.log(cocktails);
+        return cocktails.map((cocktail) => (<div key={cocktail.id + "button"} className="cocktail-search-row">
             <ReadMoreButton cocktail={cocktail} text={cocktail.name} clickReadMore={goToInfoPage}/>
             </div>
         ))

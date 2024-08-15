@@ -1,4 +1,5 @@
 export * from "./CocktailCard"
+export * from "./FavoritesDisplay"
 export * from "./Header"
 export * from "./Input"
 export * from "./SearchForm"

@@ -1,49 +1,57 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, ReactNode, useCallback, useEffect, useState } from "react";
 import { getCocktail } from "../getCocktail";
-import { SearchResult } from "../components";
+import { FavoritesDisplay } from "../components";
 import { ICocktail } from "../interfaces";
-
-//async function 
 
 export function FavoritesPage(): ReactElement {
     const [favorites, setFavorites] = useState<ICocktail[]>([]);
+    const [page, setPage] = useState<ReactNode>(<></>);
 
-    useEffect(() => {
-        setFavorites(loadFavorites());
-        console.log("use effect favorites page")
-    }, []);
-
-    const loadFavorites = ():ICocktail[] => {
-        const loadFavoritesAsString: string | null = localStorage.getItem("favorites");
-        if (loadFavoritesAsString !== null) {
-            console.log("Favorites: "+ loadFavoritesAsString);
-            console.log("FavoritesPage render")
-            const favoritesAsStrings: string[] = loadFavoritesAsString.split(",");
-            const newFavorites = favorites;
-            favoritesAsStrings.forEach(id => {
-                getCocktail(id).then((c) => newFavorites.push(c[0]));
-                console.log("new favorites " + newFavorites)
-            });
-            return newFavorites;
+    const loadFavorites = useCallback(async (): Promise<ICocktail[]> =>  {
+        try {
+            const loadFavoritesAsString: string = localStorage.getItem("favorites")!;
+            const favoritesAsStrings = loadFavoritesAsString.split(",");
+            const data = await stringsToCocktails(favoritesAsStrings);
+            console.log("data ")
+            console.log(data)
+            return data;
         }
-        else {
+        catch(error) {
             console.log("No favorites detected!")
             return [];
         }
-    }
+    }, [])
 
-    const handleOnClick = () => {
-        localStorage.clear();
-        setFavorites(loadFavorites());
-    }
+    useEffect(() => {
+        console.log("Favorite page use effect")
+        if (favoriteCheck) {
+            loadFavorites().then((favs) => {
+                setFavorites(favs);
+                console.log("favs");
+                console.log(favs);
+                setPage(<FavoritesDisplay cocktails={favs} clearAction={localStorage.clear}/>);
+            })
+        }
+    }, [loadFavorites]);
 
-    const handle = () => {
-        setFavorites(loadFavorites());
-    }
+    const favoriteCheck = localStorage.getItem("favorites") !== null;
 
-    return <div>
-        <SearchResult cocktails={favorites}/>
-        <button className="button-template" onClick={handleOnClick}>Clear</button>
-        <button className="button-template" onClick={handle}>Load</button>
-    </div>
+    return <div>{page}</div>
+}
+
+async function stringsToCocktails(strings: string[]): Promise<ICocktail[]> {
+    const cocktailArray: ICocktail[] = [];
+    strings.forEach(id => {
+        stringToCocktail(id).then((c) => cocktailArray.push(c!))
+    });
+    console.log("strings")
+    console.log(cocktailArray)
+    return cocktailArray;
+}
+
+async function stringToCocktail(str: string): Promise<ICocktail | null> {
+    const cocktail: ICocktail = await getCocktail(str).then((c) => {
+        return c[0]
+    });
+    return cocktail;
 }
