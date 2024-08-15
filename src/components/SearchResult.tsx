@@ -49,7 +49,7 @@ export function SearchResult({cocktails}: SearchResultProps): ReactElement {
     return <div>
         <button onClick={handleOnClickDecrement}>Previous page</button>
         <button onClick={handleOnClickIncrement}>Next page</button>
-        <p>Result: {resultNumber} Page: {index + 1}</p>
+        <p>Result: {resultNumber} Page: {index + 1} of {resultPages.length}</p>
         <SearchResultList results={resultPages[index]}/>
     </div>
 }

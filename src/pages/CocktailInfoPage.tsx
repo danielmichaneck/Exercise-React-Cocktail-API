@@ -1,5 +1,5 @@
 import { ReactElement, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getCocktail } from "../getCocktail";
 import { ICocktail } from "../interfaces";
 import { CocktailInfo } from "../components/CocktailInfo";

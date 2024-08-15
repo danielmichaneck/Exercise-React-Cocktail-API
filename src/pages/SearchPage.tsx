@@ -1,5 +1,5 @@
-import { ReactElement, useEffect, useState } from "react";
-import { SearchForm, Cocktail } from "../components";
+import { ReactElement, useState } from "react";
+import { SearchForm } from "../components";
 import { getCocktail } from "../getCocktail";
 import { ICocktail, ISearch } from "../interfaces";
 import { SearchResult } from "../components/SearchResult";
@@ -19,9 +19,6 @@ export function SearchPage(): ReactElement {
 
     return <div>
         <SearchForm submit={submit}/>
-        {/* {cocktails?.map((cocktail) => {
-            return <Cocktail key={cocktail.id} cocktail={cocktail} readMore={true}/>
-        })} */}
         <SearchResult cocktails={cocktails}/>
     </div>
 }

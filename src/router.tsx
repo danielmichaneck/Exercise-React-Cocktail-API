@@ -1,6 +1,7 @@
 import { createBrowserRouter, useParams } from "react-router-dom";
 import { CocktailInfoPage, HomePage, SearchPage } from "./pages";
 import { App } from "./App";
+import { FavoritesPage } from "./pages/FavoritesPage";
 
 export const router = createBrowserRouter([
     {
@@ -14,7 +15,10 @@ export const router = createBrowserRouter([
               element: <SearchPage /> },
             // Info page
             { path: "/cocktail-info?/:id",
-              element: <CocktailInfoPage/> }
+              element: <CocktailInfoPage/> },
+              // Info page
+              { path: "/favorites",
+                element: <FavoritesPage/> }
         ]
     }
 ]);

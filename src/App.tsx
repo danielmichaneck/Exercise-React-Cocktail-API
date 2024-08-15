@@ -10,6 +10,18 @@ export function App() {
 
   const navigate = useNavigate();
 
+  const addFavorite = (id: string) => {
+    const favorites: string | null = localStorage.getItem("favorites");
+    if (favorites !== null) {
+      console.log("Adding to favorites: " + id)
+      localStorage.setItem("favorites", favorites + "," + id);
+    }
+    else {
+      console.log("Favorites is null, setting to id: " + id);
+      localStorage.setItem("favorites", id);
+    }
+  }
+
   const goToInfoPage = (cocktail: ICocktail) => {
     if (cocktail !== undefined) {
       setSelectedCocktail(cocktail);
@@ -19,6 +31,7 @@ export function App() {
 
   const context: ICocktailContext = {
     selectedCocktail: selectedCocktail!, 
+    addFavorite: addFavorite,
     goToInfoPage: goToInfoPage
   }
 

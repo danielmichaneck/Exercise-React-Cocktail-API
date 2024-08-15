@@ -10,7 +10,7 @@ export function CocktailInfo({cocktail}: CocktailInfoProps): ReactElement {
     
     
     return <div className="cocktail-info">
-        <Cocktail cocktail={cocktail} readMore={false}/>
+        <Cocktail cocktail={cocktail} addFavorite={true} readMore={false}/>
         <div className="cocktail-info-side">
             Category
             <p>{cocktail.category}</p>

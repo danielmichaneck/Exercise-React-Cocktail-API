@@ -15,6 +15,7 @@ export interface ICocktail {
 
 export interface ICocktailContext {
     selectedCocktail: ICocktail;
+    addFavorite: (id: string) => void;
     goToInfoPage: (cocktail: ICocktail) => void;
 }
 
