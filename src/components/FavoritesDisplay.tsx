@@ -8,7 +8,9 @@ interface FavoritesDisplayProps {
 }
 
 export function FavoritesDisplay({cocktails, clearAction}: FavoritesDisplayProps): ReactElement {
-    return <div>
+    console.log("FavoritesDisplay")
+    console.log(cocktails)
+    return <div className="favorites-display">
         <SearchResult cocktails={cocktails}/>
         <button className="button-template" onClick={clearAction}>Clear</button>
     </div>

@@ -27,6 +27,14 @@
     padding-top: 2rem;
 }
 
+.header-link:hover {
+    background-color: rgb(100, 0, 0);
+}
+
+.header-link:active {
+    color: gray;
+}
+
 .header-title {
     margin: 0;
     padding-bottom: 1rem;

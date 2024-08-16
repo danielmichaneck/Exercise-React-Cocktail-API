@@ -16,9 +16,9 @@ export const router = createBrowserRouter([
             // Info page
             { path: "/cocktail-info?/:id",
               element: <CocktailInfoPage/> },
-              // Info page
-              { path: "/favorites",
-                element: <FavoritesPage/> }
+            // Info page
+            { path: "/favorites",
+              element: <FavoritesPage/> }
         ]
     }
 ]);

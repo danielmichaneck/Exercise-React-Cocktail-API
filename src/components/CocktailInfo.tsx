@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode } from "react";
+import { ReactElement, ReactNode, useState } from "react";
 import { ICocktail } from "../interfaces";
 import { Cocktail } from ".";
 
@@ -7,7 +7,12 @@ interface CocktailInfoProps {
 }
 
 export function CocktailInfo({cocktail}: CocktailInfoProps): ReactElement {
-    
+    let keyCount = 0;
+
+    const getKey = () => {
+        keyCount++;
+        return keyCount;
+    }
     
     return <div className="cocktail-info">
         <Cocktail cocktail={cocktail} addFavorite={true} readMore={false}/>
@@ -18,12 +23,12 @@ export function CocktailInfo({cocktail}: CocktailInfoProps): ReactElement {
                 Ingredients and measurements
                 <span>
                 {cocktail.ingredients.map((ingredient) => (
-                    <p key={ingredient}>{ingredient}</p>
+                    <p key={getKey()}>{ingredient}</p>
                 ))}
                 </span>
                 <span>
                 {cocktail.measures.map((measure) => (
-                    <p key={measure}>{measure}</p>
+                    <p key={getKey()}>{measure}</p>
                 ))}
                 </span>
             </div>

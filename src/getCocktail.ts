@@ -13,11 +13,10 @@ export async function getCocktail(id: string = "", name: string = "", random: bo
                 (drink !== undefined) &&
                 pushCocktail(formatCocktail(drink))
             ))
-            return cocktails;
         }
     })
 
-    console.log("getCocktail" + cocktails);
+    console.log("cocktails" + cocktails);
 
     return cocktails;
 }

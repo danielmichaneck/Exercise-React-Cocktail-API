@@ -7,20 +7,20 @@ export function FavoritesPage(): ReactElement {
     const [favorites, setFavorites] = useState<ICocktail[]>([]);
     const [page, setPage] = useState<ReactNode>(<></>);
 
-    const loadFavorites = useCallback(async (): Promise<ICocktail[]> =>  {
-        try {
-            const loadFavoritesAsString: string = localStorage.getItem("favorites")!;
-            const favoritesAsStrings = loadFavoritesAsString.split(",");
-            const data = await stringsToCocktails(favoritesAsStrings);
-            console.log("data ")
-            console.log(data)
-            return data;
-        }
-        catch(error) {
-            console.log("No favorites detected!")
-            return [];
-        }
-    }, [])
+    // const loadFavorites = useCallback(async (): Promise<ICocktail[]> =>  {
+    //     try {
+    //         const loadFavoritesAsString: string = localStorage.getItem("favorites")!;
+    //         const favoritesAsStrings = loadFavoritesAsString.split(",");
+    //         const data = await stringsToCocktails(favoritesAsStrings);
+    //         console.log("data ")
+    //         console.log(data)
+    //         return data;
+    //     }
+    //     catch(error) {
+    //         console.log("No favorites detected!")
+    //         return [];
+    //     }
+    // }, []);
 
     useEffect(() => {
         console.log("Favorite page use effect")
@@ -29,29 +29,44 @@ export function FavoritesPage(): ReactElement {
                 setFavorites(favs);
                 console.log("favs");
                 console.log(favs);
-                setPage(<FavoritesDisplay cocktails={favs} clearAction={localStorage.clear}/>);
+                //setPage(<FavoritesDisplay cocktails={favs} clearAction={localStorage.clear}/>);
             })
         }
-    }, [loadFavorites]);
+    }, [/*loadFavorites*/]);
 
-    const favoriteCheck = localStorage.getItem("favorites") !== null;
+    async function loadFavorites(): Promise<ICocktail[]> {
+        try {
+            const loadFavoritesAsString: string = localStorage.getItem("favorites")!;
+            const favoritesAsStrings = loadFavoritesAsString.split(",");
+            const cocktails = await stringsToCocktails(favoritesAsStrings);
+            console.log("cocktails data");
+            console.log(cocktails);
+            return cocktails;
+        }
+        catch(error) {
+            console.log("No favorites detected!")
+            return [];
+        }
+    }
 
-    return <div>{page}</div>
+    const favoriteCheck = localStorage.getItem("favorites") !== null && favorites.length < 1;
+
+    return <div className="favorites-page">
+        <FavoritesDisplay cocktails={favorites} clearAction={localStorage.clear}/>
+    </div>
 }
+
+
 
 async function stringsToCocktails(strings: string[]): Promise<ICocktail[]> {
     const cocktailArray: ICocktail[] = [];
     strings.forEach(id => {
         stringToCocktail(id).then((c) => cocktailArray.push(c!))
     });
-    console.log("strings")
-    console.log(cocktailArray)
     return cocktailArray;
 }
 
 async function stringToCocktail(str: string): Promise<ICocktail | null> {
-    const cocktail: ICocktail = await getCocktail(str).then((c) => {
-        return c[0]
-    });
-    return cocktail;
+    const cocktail = await getCocktail(str);
+    return cocktail[0];
 }

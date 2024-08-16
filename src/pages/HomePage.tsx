@@ -33,7 +33,7 @@ export function HomePage(): ReactElement {
         <button className="button-template" onClick={handleOnClick}>Another cocktail?</button>
         </div>
         <div className="homepage-landing-right-column">
-        <p>Welcome to the cocktails page! Click "Search" to search for a cocktail.</p>
+        <p>Welcome to the cocktails page! Click "Search" to search for a cocktail. Click "Favorites" to view all your saved favorite cocktails.</p>
         </div>
     </div>
 }
