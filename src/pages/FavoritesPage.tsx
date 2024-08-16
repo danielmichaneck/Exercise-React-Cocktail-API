@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode, useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { getCocktail } from "../getCocktail";
 import { FavoritesDisplay } from "../components";
 import { ICocktail } from "../interfaces";
@@ -9,7 +9,6 @@ export function FavoritesPage(): ReactElement {
     useEffect(() => {
         const favoriteCheck = localStorage.getItem("favorites") !== null;
         if (favoriteCheck) {
-            console.log("favoriteCheck!")
             loadFavorites().then((fs) => {
                 setFavorites(fs);
             })
@@ -19,11 +18,13 @@ export function FavoritesPage(): ReactElement {
         }
     }, []);
 
-    console.log("favorites")
-    console.log(favorites)
+    const clearAction = () => {
+        localStorage.clear();
+        setFavorites([]);
+    }
 
     return <div className="favorites-page">
-        <FavoritesDisplay cocktails={favorites} clearAction={localStorage.clear}/>
+        <FavoritesDisplay cocktails={favorites} clearAction={clearAction}/>
     </div>
 }
 
@@ -34,8 +35,6 @@ async function loadFavorites(): Promise<ICocktail[]> {
         const loadFavoritesAsString: string = localStorage.getItem("favorites")!;
         const favoritesAsStrings = loadFavoritesAsString.split(",");
         const cocktails = await stringsToCocktails(favoritesAsStrings);
-        console.log("cocktails data");
-        console.log(cocktails);
         return cocktails;
     }
     catch(error) {
@@ -46,8 +45,6 @@ async function loadFavorites(): Promise<ICocktail[]> {
 
 async function stringsToCocktails(strings: string[]): Promise<ICocktail[]> {
     const cocktailArray: ICocktail[] = await tempFunc(strings);
-    console.log("strings To Cocktails")
-    console.log(cocktailArray)
     return cocktailArray;
 }
 
@@ -67,7 +64,5 @@ async function tempFunc(strings: string[]): Promise<ICocktail[]> {
 
 async function stringToCocktail(str: string): Promise<ICocktail | null> {
     const cocktail = await getCocktail(str);
-    console.log("stringToCocktail")
-    console.log(cocktail)
     return cocktail[0];
 }

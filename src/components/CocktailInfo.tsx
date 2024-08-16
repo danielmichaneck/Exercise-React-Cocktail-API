@@ -17,10 +17,10 @@ export function CocktailInfo({cocktail}: CocktailInfoProps): ReactElement {
     return <div className="cocktail-info">
         <Cocktail cocktail={cocktail} addFavorite={true} readMore={false}/>
         <div className="cocktail-info-side">
-            Category
-            <p>{cocktail.category}</p>
+            <p>Category: {cocktail.category}</p>
+            <p>Glass: {cocktail.glass}</p>
+            Ingredients and measurements
             <div className="cocktail-ingredients-list">
-                Ingredients and measurements
                 <span>
                 {cocktail.ingredients.map((ingredient) => (
                     <p key={getKey()}>{ingredient}</p>
@@ -32,7 +32,9 @@ export function CocktailInfo({cocktail}: CocktailInfoProps): ReactElement {
                 ))}
                 </span>
             </div>
+            <p>Instructions</p>
+            <p>{cocktail.instructions}</p>
+            <p>Tags (if any): {cocktail.tags}</p>
         </div>
-        <p>Tags {cocktail.tags}</p>
     </div>
 }

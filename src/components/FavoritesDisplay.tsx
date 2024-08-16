@@ -8,11 +8,12 @@ interface FavoritesDisplayProps {
 }
 
 export function FavoritesDisplay({cocktails, clearAction}: FavoritesDisplayProps): ReactElement {
-    console.log("FavoritesDisplay")
-    console.log(cocktails)
+    const handleOnClick: React.MouseEventHandler<HTMLButtonElement> = () => {
+        clearAction();
+    }
 
     return <div className="favorites-display">
         <SearchResult cocktails={cocktails}/>
-        <button className="button-template" onClick={clearAction}>Clear</button>
+        <button className="button-template" onClick={handleOnClick}>Clear</button>
     </div>
 }

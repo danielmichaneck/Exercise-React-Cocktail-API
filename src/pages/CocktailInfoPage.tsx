@@ -24,8 +24,6 @@ export function CocktailInfoPage(): ReactElement {
 
     useEffect(() => {
         if (params.id !== "cocktail-info") {
-            console.log("params");
-            console.log(params);
             getCocktail(params.id, "", false).then((cocktails) => setCocktail(cocktails[0]));
         }
     }, []);

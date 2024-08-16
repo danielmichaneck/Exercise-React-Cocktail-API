@@ -13,11 +13,16 @@ export function App() {
   const addFavorite = (id: string) => {
     const favorites: string | null = localStorage.getItem("favorites");
     if (favorites !== null) {
-      console.log("Adding to favorites: " + id)
-      localStorage.setItem("favorites", favorites + "," + id);
+      if (favorites.split(",").find((favorite) => favorite === id) === undefined) {
+        console.log("Adding to favorites: " + id)
+        localStorage.setItem("favorites", favorites + "," + id);
+      }
+      else {
+        console.log("That item is already saved in your favorites!")
+      }
     }
     else {
-      console.log("Favorites is null, setting to id: " + id);
+      console.log("You don't have any favorites saved, setting the first item to: " + id);
       localStorage.setItem("favorites", id);
     }
   }

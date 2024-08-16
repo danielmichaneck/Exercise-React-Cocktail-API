@@ -15,9 +15,7 @@ export async function getCocktail(id: string = "", name: string = "", random: bo
             ))
         }
     })
-
-    console.log("cocktails" + cocktails);
-
+    
     return cocktails;
 }
 
