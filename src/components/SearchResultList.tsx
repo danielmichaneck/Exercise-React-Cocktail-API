@@ -26,12 +26,15 @@ export function SearchResultList({results}: SearchResultListProps): ReactElement
     const {goToInfoPage} = useCocktailContext();
 
     const tempFunc = () => {
-        console.log("Rendering list items")
-        console.log(results);
-        return results.map((cocktail) => (<div key={cocktail.id + "button"} className="cocktail-search-row">
-            <ReadMoreButton cocktail={cocktail} text={cocktail.name} clickReadMore={goToInfoPage}/>
-            </div>
-        ))
+        if (results !== undefined) {
+            console.log("Rendering list items")
+            console.log(results);
+            return results.map((cocktail) => (<div key={cocktail.id + "button"} className="cocktail-search-row">
+                <ReadMoreButton cocktail={cocktail} text={cocktail.name} clickReadMore={goToInfoPage}/>
+                </div>
+            ))
+        }
+        else return <></>
     }
 
     return <li>

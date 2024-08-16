@@ -7,16 +7,12 @@ interface SearchResultProps {
 }
 
 export function SearchResult({cocktails}: SearchResultProps): ReactElement {
+    const [currentPage, setCurrentPage] = useState<ICocktail[]>();
     const [index, setIndex] = useState<number>(0);
-    const [resultNumber, setResultNumber] = useState<number>(0);
-    const [resultPages, setResultPages] = useState<ICocktail[][]>([cocktails]);
 
-    const pages: ICocktail[][] = [
-        cocktails.sort((itemA, itemB) => itemA.name.localeCompare(itemB.name))
-    ];
-
+    const pages: ICocktail[][] = [];
     const length = cocktails.length;
-    let numberOfElements = 0;
+    cocktails.sort((itemA, itemB) => itemA.name.localeCompare(itemB.name))
     for (let i = 0; i * 10 < length; i += 1) {
         if (cocktails.length > 10) {
             pages[i] = cocktails.splice(i, 10);
@@ -24,21 +20,17 @@ export function SearchResult({cocktails}: SearchResultProps): ReactElement {
         else {
             pages[i] = cocktails;
         }
-        numberOfElements += pages[i].length;
     }
 
-    
+    // let displayPage: ICocktail[];
+    // currentPage === undefined ? displayPage = pages[index] : displayPage = currentPage;
+    let displayPage = pages[index];
 
-    useEffect(() => {
-        setResultPages(pages);
-        setResultNumber(numberOfElements);
-        console.log("pages in search results")
-    console.log(pages)
-    }, [cocktails]);
-    
+    /* Button functions */
     const updateIndex = (newValue: number) => {
-        if (newValue >= 0 && newValue < resultPages.length) {
+        if (newValue >= 0 && newValue < pages.length) {
             setIndex(newValue);
+            setCurrentPage(pages[index]);
         }
     }
 
@@ -50,10 +42,11 @@ export function SearchResult({cocktails}: SearchResultProps): ReactElement {
         updateIndex(index + 1);
     }
 
+    /* Return ReactElement */
     return <div>
         <button className="button-template" onClick={handleOnClickDecrement}>Previous page</button>
         <button className="button-template" onClick={handleOnClickIncrement}>Next page</button>
-        <p>Result: {resultNumber} Page: {index + 1} of {resultPages.length}</p>
-        <SearchResultList results={resultPages[index]}/>
+        <p>Result: {length} Page: {index + 1} of {pages.length}</p>
+        <SearchResultList results={displayPage}/>
     </div>
 }
