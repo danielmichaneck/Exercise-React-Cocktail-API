@@ -44,22 +44,14 @@ async function loadFavorites(): Promise<ICocktail[]> {
 }
 
 async function stringsToCocktails(strings: string[]): Promise<ICocktail[]> {
-    const cocktailArray: ICocktail[] = await tempFunc(strings);
-    return cocktailArray;
-}
-
-async function tempFunc(strings: string[]): Promise<ICocktail[]> {
     const cocktailArray: ICocktail[] = [];
-    if (strings.length < 1) {
-        return cocktailArray;
+    for (let i = 0; i < strings.length; i++) {
+        const c = await stringToCocktail(strings[i]);
+        if (c !== null) {
+            cocktailArray[i] = c;
+        }
     }
-    const cocktail = await stringToCocktail(strings[0]);
-    if (cocktail !== null) {
-        cocktailArray[0] = cocktail;
-    }
-    const newStrings = strings.filter((string) => string !== strings[0]);
-    const nextArray = await tempFunc(newStrings);
-    return [...cocktailArray, ...nextArray];
+    return cocktailArray;
 }
 
 async function stringToCocktail(str: string): Promise<ICocktail | null> {
